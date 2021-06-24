@@ -1,10 +1,10 @@
 import pymysql
 
 
-DB_HOST = ''
-DB_NAME = ''
-DB_PASS = ''
-DB_USER = ''
+DB_HOST = 'srv-mysql-01'
+DB_NAME = 'mysql'
+DB_PASS = 'pass123456'
+DB_USER = 'root'
 
 
 class OpenSQL:
@@ -39,8 +39,8 @@ class TestDB:
         self._db_name = DB_NAME
 
     def get_test_data(self):
-        # with OpenSQL(self._db_host, self._db_user, self._db_pass, self._db_name) as conn:
-        #     cursor = conn.cursor()
-        #     cursor.execute('SQL query;')
-        #     return cursor.fetchone()
+        with OpenSQL(self._db_host, self._db_user, self._db_pass, self._db_name) as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT user,host FROM mysql.user;')
+            return cursor.fetchall()
         pass
